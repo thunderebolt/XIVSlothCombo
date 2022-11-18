@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Numerics;
 using Dalamud.Game.ClientState.Objects;
@@ -189,6 +189,12 @@ namespace XIVSlothCombo.CustomComboNS.Functions
         public static void TargetObject(GameObject? target)
         {
             if (IsInRange(target)) SetTarget(target);
+        }
+
+        public static void FocusTargetObject(GameObject? target)
+        {
+            if (IsInRange(target))
+                Service.TargetManager.SetFocusTarget(target);
         }
 
         protected unsafe static StructsObject.GameObject* GetTarget(TargetType target)
