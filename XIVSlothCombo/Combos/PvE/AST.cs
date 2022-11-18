@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.ClientState.JobGauge.Enums;
+using Dalamud.Game.ClientState.JobGauge.Enums;
 using Dalamud.Game.ClientState.JobGauge.Types;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Game.ClientState.Statuses;
@@ -215,7 +215,10 @@ namespace XIVSlothCombo.Combos.PvE
                 {
                     if (PartyTargets.Any(x => x.ObjectId == SelectedRandomMember.ObjectId))
                     {
-                        TargetObject(SelectedRandomMember);
+                        if (IsEnabled(CustomComboPreset.AST_Cards_DrawOnPlay_FocusTarget))
+                            FocusTargetObject(SelectedRandomMember);
+                        else
+                            TargetObject(SelectedRandomMember);
                         GetTarget = false;
                         return true;
                     }
@@ -231,7 +234,10 @@ namespace XIVSlothCombo.Combos.PvE
                         if (((cardDrawn is CardType.BALANCE or CardType.ARROW or CardType.SPEAR) && JobIDs.Melee.Contains(job)) ||
                             ((cardDrawn is CardType.BOLE or CardType.EWER or CardType.SPIRE) && JobIDs.Ranged.Contains(job)))
                         {
-                            TargetObject(PartyTargets[i]);
+                            if (IsEnabled(CustomComboPreset.AST_Cards_DrawOnPlay_FocusTarget))
+                                FocusTargetObject(PartyTargets[i]);
+                            else
+                                TargetObject(PartyTargets[i]);
                             SelectedRandomMember = PartyTargets[i];
                             GetTarget = false;
                             return true;
@@ -246,7 +252,10 @@ namespace XIVSlothCombo.Combos.PvE
                             if ((cardDrawn is CardType.BALANCE or CardType.ARROW or CardType.SPEAR && JobIDs.Tank.Contains(job)) ||
                                 (cardDrawn is CardType.BOLE or CardType.EWER or CardType.SPIRE && JobIDs.Healer.Contains(job)))
                             {
-                                TargetObject(PartyTargets[i]);
+                                if (IsEnabled(CustomComboPreset.AST_Cards_DrawOnPlay_FocusTarget))
+                                    FocusTargetObject(PartyTargets[i]);
+                                else
+                                    TargetObject(PartyTargets[i]);
                                 SelectedRandomMember = PartyTargets[i];
                                 GetTarget = false;
                                 return true;
